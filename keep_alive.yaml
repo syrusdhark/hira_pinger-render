@@ -1,0 +1,14 @@
+name: Keep Render API Alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # Runs every 10 minutes
+  workflow_dispatch:  # Allows manual run
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send GET request to API root
+        run: |
+          curl -s https://hira-ai.onrender.com/chat || echo "API ping failed"
